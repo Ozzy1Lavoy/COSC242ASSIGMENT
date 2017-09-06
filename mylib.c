@@ -18,3 +18,38 @@ int returnStringValue(char *wordinput){
 	return total;
 
 }
+void *emalloc(size_t s) {
+	void *result = malloc(s);
+	if (NULL == result) {
+		fprintf(stderr, "Error Allocating memory. Problem==lots. Exiting... \n");
+		exit(EXIT_FAILURE);
+	}
+	fprintf(stdout,"sucsessfully allocated memory \n");
+	return result;
+}
+void efree(void *c){
+	fprintf(stdout,"sucsessfulyl freed memory\n");
+	free(c);
+	return;
+}
+void *erealloc(void *array, size_t s){
+	void *result=realloc(array,s);
+	if(result==NULL){
+		fprintf(stderr,"Error Reallocating memory. Problem==lots. Exiting...\n");
+		exit(EXIT_FAILURE);
+	}
+	fprintf(stdout,"sucsessfully reallocated memory\n");
+	return result;
+}
+int checkNumbers(char *checkedString){
+	int checkCounter=0;
+	while(checkedString[checkCounter]!='\0'){
+		if(!((checkedString[checkCounter]>('1'-1))&&(checkedString[checkCounter]<('9'+1)))){
+			return 0;
+		}
+		checkCounter++;
+	}
+	return 1;
+	
+
+}
