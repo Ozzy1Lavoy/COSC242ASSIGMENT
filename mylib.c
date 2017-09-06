@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "mylib.h"
-//In here go any functions that can be called
+/*In here go any functions that can be called*/
 
 /*
 returnStringValue takes a character index(String) and returns the

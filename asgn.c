@@ -1,28 +1,14 @@
 #include <stdlib.h>
 #include<stdio.h>
 #include<string.h>
+#include"mylib.h"
 #define HASH_SIZE 3877
+/*
+Asher And Oscar 6/09/2017,
+Main creates a Hashtable that has a set ammount of container objects,
+each container object stores each string with that integer value 
 
-
-
-int returnStringValue(char *wordinput){
-	int total=0;
-	int wordCounter=0;
-	while(wordinput[wordCounter]!='\0'){
-		total=total+(wordinput[wordCounter]+0);
-		wordCounter++;
-	}
-	return total;
-
-}
-
-
-
-
-
-
-
-
+*/
 int main(int argc,char **argv){
 	int enteredWords=0;
 	char *word;
