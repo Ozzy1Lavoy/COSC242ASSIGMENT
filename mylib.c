@@ -24,11 +24,9 @@ void *emalloc(size_t s) {
 		fprintf(stderr, "Error Allocating memory. Problem==lots. Exiting... \n");
 		exit(EXIT_FAILURE);
 	}
-	fprintf(stdout,"sucsessfully allocated memory \n");
 	return result;
 }
 void efree(void *c){
-	fprintf(stdout,"sucsessfulyl freed memory\n");
 	free(c);
 	return;
 }

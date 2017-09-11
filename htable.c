@@ -17,12 +17,13 @@ hashTable createNewTable(int typeString){
 	int counter=0;
 	if(typeString==1){
 		while(counter<ArraySize){
-			printf("creating tables\n");
+			printf("creating flex table\n");
 			result->containerArray[counter]=container_new();
 			counter++;
 		}	
-	}else if(typeString==2){
+	}else if(typeString==0){
 		while(counter<ArraySize){
+			printf("creating new RBT table\n");
 			result->containerArray[counter]=container_new_rbt();
 			counter++;
 		}

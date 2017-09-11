@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include<stdio.h>
 #include<string.h>
+#include<getopt.h>
 #include"mylib.h"
 #include "htable.h"
 /*
@@ -10,37 +11,53 @@ each container object stores each string with that integer value
 
 */
 int main(int argc,char **argv){
+	FILE *infile;
 	int enteredWords=0;
 	char *word;
+	char *inputWord;
+	char **wordArray;
 	int result=0;
-	int argCounter=0;
+	int argCounter=1;
+	int counter=0;
+	int sizeOfInput=1;
+	int robust=0;
 	word=emalloc(60 * sizeof(word[0]));
-	if(argc>1){
-		fprintf(stderr,"there is input\n");
-		while(argCounter<argc){
-			if(strcmp(argv[argCounter],"-r")==0){
+	inputWord=emalloc(60 * sizeof(word[0]));
+	wordArray=emalloc(sizeOfInput * sizeof(wordArray[0][0]));
+	hashTable cool;
+	
+	/*
+	
+	
+	
+	
+	
+	
+	*/
+	
+	const char *optstring = "rpshi:";
+	char option;
+	while ((option = getopt(argc, argv, optstring)) != EOF) {
+		switch (option) {
+			case 'r':
 				printf("robust function called\n");
-			}
-			if(strcmp(argv[argCounter],"-p")==0){
+				robust=1;
+				cool=createNewTable(0);
+				break;
+				
+			case 'p':
 				printf("print function called\n");
-			}
-			if(strcmp(argv[argCounter],"-s")==0){
-				if((argCounter+1>=argc)){
-					fprintf(stderr,"-s requires input after\n");
-				}
-				else if(checkNumbers(argv[argCounter+1])!=1){
+				break;
+				
+			case 's':
+				if(checkNumbers(optarg)!=1){
 					fprintf(stderr,"-s requires and integer above 0 after\n");
 				}
 				else{
-					printf("table size function called with size %s\n",argv[argCounter+1]);
-					argCounter++;
+					printf("table size function called with size %s\n",optarg);
 				}
-				
-			}
-			if(strcmp(argv[argCounter],"-i")==0){
-				printf("information function called\n");
-			}
-			if(strcmp(argv[argCounter],"-h")==0){
+				break;
+			case 'h':
 				fprintf(stderr,"this is the hash table appplication.\n");
 				fprintf(stderr,"here are the commands: \n\n'-r' > run the applciation with the containers having a robust RBT");
 				fprintf(stderr,"layout\n\n'-s ,tablesize' > run the applciation with a hash table size of 'tablesize', 'tablesize'");
@@ -50,25 +67,80 @@ int main(int argc,char **argv){
 				fprintf(stderr,"how many unknown words were found like this:\n");
 				fprintf(stderr,"Fill time :  1.390000 \nSearch time :  0.450000  \nUnknown words :  8690");
 				fprintf(stderr,"\n\n'-h' > Ask for help. You probably alredy know this one\n");
-			}
-			argCounter++;
+				break;
+			default:
+				
+				break;
+			/* if an unknown option is given */
 		}
-	
-	
-	}else{
-	printf("there is no inputs\n");
-		while(scanf("%59s",word)==1&&(enteredWords<5)){
-		result=returnStringValue(word);
-			printf("result : %d\n",result);
-			enteredWords++;
-		}
-		word=erealloc( word,70 * sizeof( word[0]) );
-		
-	
 	}
+	
+	
+	
+	/*
+	
+	
+	
+	
+	
+	
+	
+	
+	*/
+	if(!(robust==1)){
+		cool=createNewTable(1);
+	}
+	if(optind>0)
+	if (NULL == (infile = fopen(argv[optind], "r"))) {
+					fprintf(stderr, "%s: Cant open the File %s or it isn't a valid command\n", argv[0],argv[optind]);
+					efree(word);
+					exitTable(&cool);
+					return EXIT_FAILURE;
+	}
+	printf("opened %s\n",argv[optind]);
+	while((counter<sizeOfInput) && (fscanf(infile,"%s",inputWord))==1){
+		if((sizeOfInput)==(counter+1)){
+				sizeOfInput=(sizeOfInput*2);
+				wordArray=erealloc(wordArray,sizeOfInput*sizeof(wordArray[0]));
+			}
+		wordArray[counter]=emalloc(sizeof(inputWord)+1);
+		printf("putting %s in %d\n",inputWord,counter);
+		strcpy(wordArray[counter],inputWord);
+		counter++;
+	}
+	fclose(infile);	
+	while(scanf("%59s",word)==1){
+		result=returnStringValue(word);
+		printf("result : %s had  a hash key of %d\n",word,result);
+		enteredWords++;
+	}
+	word=erealloc( word,70 * sizeof( word[0]) );
+	printf("freeing inputWord\n");
 	efree(word);
-	hashTable cool=createNewTable(1);
+	efree(inputWord);
+	counter=0;
+	while(counter<sizeOfInput){
+		printf("freeing wordArray %d\n",counter);
+		efree(wordArray[counter]);
+		counter++;
+	}
 	exitTable(&cool);
 	return 1;
 
 }
+/*
+
+/*if (NULL == (infile = fopen(fscanf(stdin,"%s",inputfilelocation), "r"))) {
+			fprintf(stderr, "%s: Cant open the File %s or it isn't a valid command\n", argv[0],inputfilelocation);
+					efree(inputWord);
+					efree(inputfilelocation);
+					efree(word);
+					exitTable(&cool);
+					return EXIT_FAILURE;
+	}
+	while(fscanf(infile,"%s",inputWord)==1){
+			fprintf(stdout,"printing %s\n",inputWord);
+				
+	}
+	fclose(infile);
+	*/

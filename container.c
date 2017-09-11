@@ -9,12 +9,12 @@ struct containerrec {
 };
 container container_new(){
 	container result=emalloc(sizeof(result));
-	result->type=FLEX_ARRAY;
+		result->type=FLEX_ARRAY;
 	return result;
 }
 container container_new_rbt(){
 	container result=emalloc(sizeof(result));
-	result->type=RED_BLACK_TREE;
+		result->type=RED_BLACK_TREE;
 	return result;
 }
 void container_add(container c, char *word) {
