@@ -7,7 +7,8 @@
 //extern void *emalloc(size_t);
 typedef struct hashTablerec *hashTable;
 extern hashTable createNewTable();
-extern void compareTable();
-extern void exitTable(hashTable *c);
+extern int compareTable(hashTable c, char *word);
+extern void exitTable(hashTable c);
+extern int addInto(hashTable c,char *word);
 
 #endif
