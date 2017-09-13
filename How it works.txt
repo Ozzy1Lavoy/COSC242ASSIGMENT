@@ -1,0 +1,51 @@
+
+-------------------------------------------------HOW THE THINGY ACCTUALY FUNCTIONS:-----------------------------------------------
+There is 'asgn.c', which is connected to a whole bunch of '.h' files,
+which have basic function frameworks that are run via their connected '.c' files with the same name.
+'asgn.c' creates a 'htable.c', which is created with 3877 'container.c' objects. Each of these containers has a integer value'key'.
+When a word is placed into the htable, each of its letters is turned into its respective char number, added together, and placed in
+the 'container' object that has the same key as the total, and then placed in using a RBT tree using flexsort. 
+When a word is searched for, the 'container' that has the same key as the words value is looked into, and using RBT tree seach, 
+is checked to see if the searched for word is there.
+
+Files:
+asgn.c->
+  HAS THE MAIN FUNCTION 
+  MAIN FUNCTION CREATES A HTABLE
+  TAKE OPERATOR INPUTS(E.G"-R" TELLS THE CONTAINERS TO BE MADE UP OF A REB-BLACK TREE)
+  READS A FILE AND FILLS IT'S HTABLE CONTAINERS WITH THE INPUTS
+  OUTPUTS ANY SCANNED WORDS FROM STDIN THAT ARN'T FOUDN WITH (SEARCH) TO STDOUT.
+mylib.h->
+  IS CONNECTED TO VIA ASGN.C.
+  HOLDS THHE HEADER OF ALL 'MYLIB.C' FUNCTIONS
+mylib.c->
+  CONTAINS ALL THE BASIC HOUSEKEEPING FUNCTIONS
+  E.G IS HAS THE EMALLOC COMMAND TO ALLOCATE,REALLOCATE AND FREE MEMORY
+container.h->
+  IS CONNECTED TO VIA HTABLE.C
+  HOLDS ALL OF THE FUNCTIONS NESSECARY TO TAKE AND STORE AN INTEGER AND STRING VIA RBT AND FLEXARRAY
+container.c->
+  CONTAINS ALL OF THE FUNCTIONS TO STORE AND SEARCH BOTH TYPES OF TREES
+htable.h->
+  IS CONNECTED TO VIA ASGN.C
+  CONTAINS ALL OF THE HEADERS FOR USEFUL FUNCTIONS SUCH AS FILLING ITSELF WITH CONTAINERS
+htable.c->
+  IS CREATED BY FILLING ITSELF WITH CONTAINERS
+  WHEN IT IS GIVEN A WORD TO READ, IT ADDS IT TO RELEVANT CONTAINER
+  WHEN IT IS GIVEN A WORD TO SEARCH IT SEARCHES RELVANT CONTAINER
+
+rbt.c->
+  HOLDS THE FUNCTIONS TO ADD AND SEARCH A RBT TREE
+rbt.h->
+  HOLDS ALL THE HEADERS OF THE FUNCTIONS  TO SEARCH AND ADD TO A RBT TREE
+flexarray.c->
+  HOLDS ALL THE FUCNTIONS TO SEARCH AND ADD TO A FLEX ARRAY 
+flexarray.h->
+  HOLDS ALL THE HEADERS OF FUNCTIONS TO ADD AND SEARCH A FLEXARRAY
+
+
+Comments(Oscar):
+
+Comments(Asher):
+
+Comments(James):
